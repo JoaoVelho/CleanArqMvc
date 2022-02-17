@@ -1,5 +1,6 @@
 ﻿using CleanArqMvc.Application.DTOs;
 using CleanArqMvc.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,6 +21,8 @@ namespace CleanArqMvc.WebUI.Controllers
             _productService = productAppService;
             _categoryService = categoryService;
             _environment = environment;
+
+
         }
 
         [HttpGet]
@@ -74,6 +77,7 @@ namespace CleanArqMvc.WebUI.Controllers
             return View(productDto);
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpGet()]
         public async Task<IActionResult> Delete(int? id)
         {
